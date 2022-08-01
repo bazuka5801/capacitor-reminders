@@ -10,6 +10,13 @@
 		03FC29A292ACC40490383A1F /* Pods_Plugin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B2A61DA5A1F2DD4F959604D /* Pods_Plugin.framework */; };
 		20C0B05DCFC8E3958A738AF2 /* Pods_PluginTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6753A823D3815DB436415E3 /* Pods_PluginTests.framework */; };
 		2F98D68224C9AAE500613A4C /* Reminders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F98D68124C9AAE400613A4C /* Reminders.swift */; };
+		502857002896546600AFA3ED /* ReminderStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502856FF2896546600AFA3ED /* ReminderStore.swift */; };
+		502857022896554700AFA3ED /* ReminderError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502857012896554700AFA3ED /* ReminderError.swift */; };
+		50285705289655AA00AFA3ED /* Reminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50285704289655AA00AFA3ED /* Reminder.swift */; };
+		50285707289655DB00AFA3ED /* EKEventStore+AsyncFetch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50285706289655DB00AFA3ED /* EKEventStore+AsyncFetch.swift */; };
+		502857092896566500AFA3ED /* Reminder+EKReminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502857082896566500AFA3ED /* Reminder+EKReminder.swift */; };
+		5028570B289656A800AFA3ED /* EKReminder+Reminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5028570A289656A800AFA3ED /* EKReminder+Reminder.swift */; };
+		5028570D28965AC300AFA3ED /* Reminder+Capacitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5028570C28965AC300AFA3ED /* Reminder+Capacitor.swift */; };
 		50ADFF92201F53D600D50D53 /* Plugin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50ADFF88201F53D600D50D53 /* Plugin.framework */; };
 		50ADFF97201F53D600D50D53 /* RemindersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50ADFF96201F53D600D50D53 /* RemindersTests.swift */; };
 		50ADFF99201F53D600D50D53 /* RemindersPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 50ADFF8B201F53D600D50D53 /* RemindersPlugin.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -31,6 +38,13 @@
 /* Begin PBXFileReference section */
 		2F98D68124C9AAE400613A4C /* Reminders.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reminders.swift; sourceTree = "<group>"; };
 		3B2A61DA5A1F2DD4F959604D /* Pods_Plugin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Plugin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		502856FF2896546600AFA3ED /* ReminderStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderStore.swift; sourceTree = "<group>"; };
+		502857012896554700AFA3ED /* ReminderError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderError.swift; sourceTree = "<group>"; };
+		50285704289655AA00AFA3ED /* Reminder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reminder.swift; sourceTree = "<group>"; };
+		50285706289655DB00AFA3ED /* EKEventStore+AsyncFetch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EKEventStore+AsyncFetch.swift"; sourceTree = "<group>"; };
+		502857082896566500AFA3ED /* Reminder+EKReminder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Reminder+EKReminder.swift"; sourceTree = "<group>"; };
+		5028570A289656A800AFA3ED /* EKReminder+Reminder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EKReminder+Reminder.swift"; sourceTree = "<group>"; };
+		5028570C28965AC300AFA3ED /* Reminder+Capacitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Reminder+Capacitor.swift"; sourceTree = "<group>"; };
 		50ADFF88201F53D600D50D53 /* Plugin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Plugin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		50ADFF8B201F53D600D50D53 /* RemindersPlugin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RemindersPlugin.h; sourceTree = "<group>"; };
 		50ADFF8C201F53D600D50D53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -69,6 +83,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		502857032896558300AFA3ED /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				502857012896554700AFA3ED /* ReminderError.swift */,
+				502856FF2896546600AFA3ED /* ReminderStore.swift */,
+				50285704289655AA00AFA3ED /* Reminder.swift */,
+				50285706289655DB00AFA3ED /* EKEventStore+AsyncFetch.swift */,
+				502857082896566500AFA3ED /* Reminder+EKReminder.swift */,
+				5028570A289656A800AFA3ED /* EKReminder+Reminder.swift */,
+				5028570C28965AC300AFA3ED /* Reminder+Capacitor.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		50ADFF7E201F53D600D50D53 = {
 			isa = PBXGroup;
 			children = (
@@ -92,6 +120,7 @@
 		50ADFF8A201F53D600D50D53 /* Plugin */ = {
 			isa = PBXGroup;
 			children = (
+				502857032896558300AFA3ED /* Models */,
 				50E1A94720377CB70090CE1A /* RemindersPlugin.swift */,
 				2F98D68124C9AAE400613A4C /* Reminders.swift */,
 				50ADFF8B201F53D600D50D53 /* RemindersPlugin.h */,
@@ -307,6 +336,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				50E1A94820377CB70090CE1A /* RemindersPlugin.swift in Sources */,
+				502857002896546600AFA3ED /* ReminderStore.swift in Sources */,
+				5028570D28965AC300AFA3ED /* Reminder+Capacitor.swift in Sources */,
+				502857022896554700AFA3ED /* ReminderError.swift in Sources */,
+				5028570B289656A800AFA3ED /* EKReminder+Reminder.swift in Sources */,
+				502857092896566500AFA3ED /* Reminder+EKReminder.swift in Sources */,
+				50285705289655AA00AFA3ED /* Reminder.swift in Sources */,
+				50285707289655DB00AFA3ED /* EKEventStore+AsyncFetch.swift in Sources */,
 				2F98D68224C9AAE500613A4C /* Reminders.swift in Sources */,
 				50ADFFA82020EE4F00D50D53 /* RemindersPlugin.m in Sources */,
 			);
