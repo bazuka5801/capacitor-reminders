@@ -91,13 +91,15 @@ write({ id }: { id: string; }) => Promise<void>
 
 #### CapacitorReminder
 
-| Prop                 | Type                 |
-| -------------------- | -------------------- |
-| **`id`**             | <code>string</code>  |
-| **`title`**          | <code>string</code>  |
-| **`dueDate`**        | <code>string</code>  |
-| **`notes`**          | <code>string</code>  |
-| **`isComplete`**     | <code>boolean</code> |
-| **`completionDate`** | <code>string</code>  |
+| Prop                     | Type                                                                                                                                                                                                                                                                                                                                                                     |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **`id`**                 | <code>string</code>                                                                                                                                                                                                                                                                                                                                                      |
+| **`title`**              | <code>string</code>                                                                                                                                                                                                                                                                                                                                                      |
+| **`dueDate`**            | <code>string</code>                                                                                                                                                                                                                                                                                                                                                      |
+| **`notes`**              | <code>string</code>                                                                                                                                                                                                                                                                                                                                                      |
+| **`isComplete`**         | <code>boolean</code>                                                                                                                                                                                                                                                                                                                                                     |
+| **`completionDate`**     | <code>string</code>                                                                                                                                                                                                                                                                                                                                                      |
+| **`hasRecurrenceRules`** | <code>boolean</code>                                                                                                                                                                                                                                                                                                                                                     |
+| **`recurrenceRules`**    | <code>[{ frequency: 'daily' \| 'weekly' \| 'monthly' \| 'yearly'; interval: number; dateEnd: string; daysOfTheWeek: [{ dayOfTheWeek: 'sunday' \| 'monday' \| 'tuesday' \| 'wednesday' \| 'thursday' \| 'friday' \| 'saturday'; weekNumber: number; }]; daysOfTheMonth: [number]; daysOfTheYear: [number]; weeksOfTheYear: [number]; monthsOfTheYear: [number]; }]</code> |
 
 </docgen-api>
