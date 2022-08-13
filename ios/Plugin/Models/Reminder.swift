@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import EventKit
 
 struct Reminder: Equatable, Identifiable {
     var id: String = UUID().uuidString
@@ -15,6 +16,8 @@ struct Reminder: Equatable, Identifiable {
     var notes: String? = nil
     var isComplete: Bool = false
     var completionDate: Date?
+    var recurrenceRules: [EKRecurrenceRule]?
+    var hasRecurrenceRules: Bool = false
 }
 
 extension Array where Element == Reminder {

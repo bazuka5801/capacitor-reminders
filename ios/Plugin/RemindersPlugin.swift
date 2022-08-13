@@ -9,11 +9,10 @@ import Capacitor
 public class RemindersPlugin: CAPPlugin {
     private let implementation = Reminders()
     
-    @available(iOS 13.0.0, *)
-    @objc func requestPermissions(_ call: CAPPluginCall) async {
+    @objc override public func requestPermissions(_ call: CAPPluginCall) {
         if (!ReminderStore.shared.isAvailable) {
             do {
-                try await ReminderStore.shared.requestAccess()
+                try ReminderStore.shared.requestAccess()
                 call.resolve()
             }
             catch {
@@ -30,17 +29,22 @@ public class RemindersPlugin: CAPPlugin {
     }
     
     
-    @available(iOS 13.0.0, *)
-    @objc func readAll(_ call: CAPPluginCall) async {
-        do {
-            let reminders = try await ReminderStore.shared.readAll()
-            
-            var result = [:] as [String:Any]
-            result["reminders"] = reminders.map { $0.serialize() }
-            call.resolve(result)
-        }
-        catch {
-            call.reject(error.localizedDescription)
+    @objc func readAll(_ call: CAPPluginCall) {
+        if #available(iOS 13.0, *) {
+            Task {
+                do {
+                    let reminders = try await ReminderStore.shared.readAll()
+                    
+                    var result = [:] as [String:Any]
+                    result["reminders"] = reminders.map { $0.serialize() }
+                    call.resolve(result)
+                }
+                catch {
+                    call.reject(error.localizedDescription)
+                }
+            }
+        } else {
+            // Fallback on earlier versions
         }
     }
     

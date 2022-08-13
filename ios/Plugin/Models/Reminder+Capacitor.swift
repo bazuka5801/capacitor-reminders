@@ -8,16 +8,70 @@
 
 import Foundation
 import Capacitor
+import EventKit
+
+extension Date {
+    func localDate() -> Date {
+        let timeZoneOffset = Double(TimeZone.current.secondsFromGMT(for: self))
+        guard let localDate = Calendar.current.date(byAdding: .second, value: Int(timeZoneOffset), to: self) else {return Date()}
+
+        return localDate
+    }
+}
+
+
+extension EKRecurrenceFrequency : CustomStringConvertible {
+    public var description: String {
+        switch self {
+            case .daily : return "daily"
+            case .weekly : return "weekly"
+            case .monthly : return "monthly"
+            case .yearly : return "yearly"
+        }
+    }
+}
+extension EKWeekday : CustomStringConvertible {
+    public var description: String {
+        switch self {
+            case .sunday : return "sunday"
+            case .monday : return "monday"
+            case .tuesday : return "tuesday"
+            case .wednesday : return "wednesday"
+            case .thursday : return "thursday"
+            case .friday : return "friday"
+            case .saturday : return "saturday"
+        }
+    }
+}
 
 extension Reminder {
     func serialize() -> NSDictionary {
         return [
             "id": id,
             "title": title,
-            "dueDate": dueDate ?? "",
+            "dueDate": dueDate?.localDate() ?? "",
             "notes": notes ?? "",
             "isComplete": isComplete,
-            "completionDate": completionDate ?? ""
+            "completionDate": completionDate?.localDate() ?? "",
+            "hasRecurrenceRules": hasRecurrenceRules,
+            "recurrenceRules": recurrenceRules != nil ? recurrenceRules?.compactMap { rule in
+                return [
+                    "frequency": "\(rule.frequency)",
+                    "interval": rule.interval,
+                    "dateEnd": rule.recurrenceEnd?.endDate?.localDate() ?? "",
+                    "daysOfTheWeek": rule.daysOfTheWeek != nil ? rule.daysOfTheWeek!.compactMap({ dayOfWeek in
+                        return [
+                            "dayOfTheWeek": "\(dayOfWeek.dayOfTheWeek)",
+                            "weekNumber": dayOfWeek.weekNumber,
+                        ]
+                    }) : "",
+                    "daysOfTheMonth": rule.daysOfTheMonth ?? "",
+                    "daysOfTheYear": rule.daysOfTheYear ?? "",
+                    "weeksOfTheYear": rule.weeksOfTheYear ?? "",
+                    "monthsOfTheYear": rule.monthsOfTheYear ?? ""
+                ]
+            }  : ""
+            
         ]
     }
     
@@ -25,7 +79,7 @@ extension Reminder {
     init(with obj: JSObject) throws {
         let isoDate = obj["dueDate"]
         let dateFormatter = DateFormatter()
-        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        //dateFormatter.locale = Locale(identifier: "en_US_POSIX")
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
         if (obj["dueDate"] == nil) {
             dueDate = nil

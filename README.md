@@ -9,6 +9,10 @@ npm install capacitor-reminders
 npx cap sync
 ```
 
+## IMPORTANT (iOS)
+
+Add `NSRemindersUsageDescription` into your `Info.plist`
+
 ## API
 
 <docgen-index>

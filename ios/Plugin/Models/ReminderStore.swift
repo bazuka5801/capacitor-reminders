@@ -9,6 +9,17 @@
 import Foundation
 import EventKit
 
+extension EKAuthorizationStatus : CustomStringConvertible {
+    public var description: String {
+        switch self {
+            case .notDetermined : return "notDetermined"
+            case .restricted : return "restricted"
+            case .denied : return "denied"
+            case .authorized : return "authorized"
+        }
+    }
+}
+
 class ReminderStore {
     static let shared = ReminderStore()
     
@@ -19,27 +30,32 @@ class ReminderStore {
     }
     
     var authorizationStatus: String {
-        String(describing: EKEventStore.authorizationStatus(for: .reminder))
+        "\(EKEventStore.authorizationStatus(for: .reminder))"
     }
     
-    @available(iOS 13.0.0, *)
-    func requestAccess() async throws {
-        let status = EKEventStore.authorizationStatus(for: .reminder)
-
-        switch status {
-        case .authorized:
-            return
-        case .restricted:
-            throw ReminderError.accessRestricted
-        case .notDetermined:
-            let accessGranted = try await ekStore.requestAccess(to: .reminder)
-            guard accessGranted else {
-                throw ReminderError.accessDenied
+    func requestAccess() throws {
+        if #available(iOS 13.0, *) {
+            Task {
+                let status = EKEventStore.authorizationStatus(for: .reminder)
+                
+                switch status {
+                case .authorized:
+                    return
+                case .restricted:
+                    throw ReminderError.accessRestricted
+                case .notDetermined:
+                    let accessGranted = try await ekStore.requestAccess(to: .reminder)
+                    guard accessGranted else {
+                        throw ReminderError.accessDenied
+                    }
+                case .denied:
+                    throw ReminderError.accessDenied
+                @unknown default:
+                    throw ReminderError.unknown
+                }
             }
-        case .denied:
-            throw ReminderError.accessDenied
-        @unknown default:
-            throw ReminderError.unknown
+        } else {
+            // Fallback on earlier versions
         }
     }
     
@@ -50,7 +66,7 @@ class ReminderStore {
         return ekReminder
     }
     
-    @available(iOS 13.0.0, *)
+    @available(iOS 13, *)
     func readAll() async throws -> [Reminder] {
         guard isAvailable else {
             throw ReminderError.accessDenied
