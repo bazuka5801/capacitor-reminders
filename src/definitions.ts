@@ -1,3 +1,26 @@
+export enum DayOfTheWeek {
+  'sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday',
+}
+export enum RecurrenceRuleFrequency {
+  'daily', 'weekly', 'monthly', 'yearly'
+}
+
+export interface RecurrenceRuleDayOfWeek {
+  dayOfTheWeek: DayOfTheWeek,
+  weekNumber: number
+}
+
+export interface RecurrenceRule {
+  frequency: RecurrenceRuleFrequency,
+  interval: number,
+  dateEnd: string,
+  daysOfTheWeek: RecurrenceRuleDayOfWeek[],
+  daysOfTheMonth: number[],
+  daysOfTheYear: number[],
+  weeksOfTheYear: number[],
+  monthsOfTheYear: number[],
+}
+
 export interface CapacitorReminder {
   id: string
   title: string
@@ -6,19 +29,7 @@ export interface CapacitorReminder {
   isComplete: boolean
   completionDate?: string
   hasRecurrenceRules: boolean
-  recurrenceRules: [{
-    frequency: 'daily' | 'weekly' | 'monthly' | 'yearly',
-    interval: number,
-    dateEnd: string,
-    daysOfTheWeek: [{
-      dayOfTheWeek: 'sunday' | 'monday' | 'tuesday' | 'wednesday' | 'thursday' | 'friday' | 'saturday',
-      weekNumber: number
-    }],
-    daysOfTheMonth: [number],
-    daysOfTheYear: [number],
-    weeksOfTheYear: [number],
-    monthsOfTheYear: [number],
-  }]
+  recurrenceRules: RecurrenceRule[]
 }
 
 export interface RemindersPlugin {
