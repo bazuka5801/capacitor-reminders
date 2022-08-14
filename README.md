@@ -21,7 +21,7 @@ Add `NSRemindersUsageDescription` into your `Info.plist`
 * [`checkPermissions()`](#checkpermissions)
 * [`readAll()`](#readall)
 * [`write(...)`](#write)
-* [`write(...)`](#write)
+* [`delete(...)`](#delete)
 * [Interfaces](#interfaces)
 * [Enums](#enums)
 
@@ -33,8 +33,10 @@ Add `NSRemindersUsageDescription` into your `Info.plist`
 ### requestPermissions()
 
 ```typescript
-requestPermissions() => Promise<void>
+requestPermissions() => Promise<{ permission: 'notDetermined' | 'restricted' | 'denied' | 'authorized'; }>
 ```
+
+**Returns:** <code>Promise&lt;{ permission: 'notDetermined' | 'restricted' | 'denied' | 'authorized'; }&gt;</code>
 
 --------------------
 
@@ -74,10 +76,10 @@ write({ reminder }: { reminder: CapacitorReminder; }) => Promise<void>
 --------------------
 
 
-### write(...)
+### delete(...)
 
 ```typescript
-write({ id }: { id: string; }) => Promise<void>
+delete({ id }: { id: string; }) => Promise<void>
 ```
 
 | Param     | Type                         |

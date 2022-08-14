@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { WebPlugin } from '@capacitor/core';
 
 import type { CapacitorReminder, RemindersPlugin } from './definitions';
 
 export class RemindersWeb extends WebPlugin implements RemindersPlugin {
-  requestPermissions(): Promise<void> {
+  requestPermissions(): Promise<{ permission: 'notDetermined' | 'restricted' | 'denied' | 'authorized'}> {
     throw new Error('Method not implemented.');
   }
   checkPermissions(): Promise<{ permission: 'notDetermined' | 'restricted' | 'denied' | 'authorized'; }> {
@@ -12,14 +13,10 @@ export class RemindersWeb extends WebPlugin implements RemindersPlugin {
   readAll(): Promise<{ reminders: CapacitorReminder[]; }> {
     throw new Error('Method not implemented.');
   }
-  write({ reminder }: { reminder: CapacitorReminder; }): Promise<void>;
-  write({ id }: { id: string; }): Promise<void>;
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  write(__0: unknown): Promise<void> {
+  write(_: { reminder: CapacitorReminder; }): Promise<void> {
     throw new Error('Method not implemented.');
-  }
-  async echo(options: { value: string }): Promise<{ value: string }> {
-    console.log('ECHO', options);
-    return options;
-  }
+  };
+  delete(_: { id: string; }): Promise<void> {
+    throw new Error('Method not implemented.');
+  };
 }
