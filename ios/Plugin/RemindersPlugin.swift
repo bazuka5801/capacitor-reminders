@@ -12,15 +12,18 @@ public class RemindersPlugin: CAPPlugin {
     @objc override public func requestPermissions(_ call: CAPPluginCall) {
         if (!ReminderStore.shared.isAvailable) {
             do {
-                try ReminderStore.shared.requestAccess()
-                call.resolve()
+                try ReminderStore.shared.requestAccess() {
+                    DispatchQueue.main.async {
+                        call.resolve(["permission":ReminderStore.shared.authorizationStatus])
+                    }
+                }
             }
             catch {
                 call.reject(error.localizedDescription)
             }
         }
         else {
-            call.resolve()
+            call.resolve(["permission":ReminderStore.shared.authorizationStatus])
         }
     }
     

@@ -33,7 +33,7 @@ export interface CapacitorReminder {
 }
 
 export interface RemindersPlugin {
-  requestPermissions(): Promise<void>;
+  requestPermissions(): Promise<{ permission: 'notDetermined' | 'restricted' | 'denied' | 'authorized'}>;
   checkPermissions(): Promise<{ permission: 'notDetermined' | 'restricted' | 'denied' | 'authorized'}>;
   readAll(): Promise<{ reminders: CapacitorReminder[] }>;
   write({ reminder }: { reminder: CapacitorReminder}): Promise<void>

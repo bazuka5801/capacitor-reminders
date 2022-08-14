@@ -33,26 +33,35 @@ class ReminderStore {
         "\(EKEventStore.authorizationStatus(for: .reminder))"
     }
     
-    func requestAccess() throws {
+    func requestAccess(completion: @escaping () -> ()) throws {
         if #available(iOS 13.0, *) {
             Task {
                 let status = EKEventStore.authorizationStatus(for: .reminder)
                 
                 switch status {
                 case .authorized:
+                    completion()
                     return
                 case .restricted:
+                    completion()
                     throw ReminderError.accessRestricted
                 case .notDetermined:
                     let accessGranted = try await ekStore.requestAccess(to: .reminder)
+                    
                     guard accessGranted else {
+                        completion()
                         throw ReminderError.accessDenied
                     }
+                    completion()
                 case .denied:
+                    completion()
                     throw ReminderError.accessDenied
                 @unknown default:
+                    completion()
                     throw ReminderError.unknown
                 }
+                
+                completion()
             }
         } else {
             // Fallback on earlier versions
