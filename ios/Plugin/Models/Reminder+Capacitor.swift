@@ -10,16 +10,6 @@ import Foundation
 import Capacitor
 import EventKit
 
-extension Date {
-    func localDate() -> Date {
-        let timeZoneOffset = Double(TimeZone.current.secondsFromGMT(for: self))
-        guard let localDate = Calendar.current.date(byAdding: .second, value: Int(timeZoneOffset), to: self) else {return Date()}
-
-        return localDate
-    }
-}
-
-
 extension EKRecurrenceFrequency : CustomStringConvertible {
     public var description: String {
         switch self {
@@ -49,16 +39,17 @@ extension Reminder {
         return [
             "id": id,
             "title": title,
-            "dueDate": dueDate?.localDate() ?? "",
+            "dueDate": dueDate ?? "",
             "notes": notes ?? "",
             "isComplete": isComplete,
-            "completionDate": completionDate?.localDate() ?? "",
+            "completionDate": completionDate ?? "",
             "hasRecurrenceRules": hasRecurrenceRules,
+            "lastModifiedDate": lastModifiedDate ?? "",
             "recurrenceRules": recurrenceRules != nil ? recurrenceRules?.compactMap { rule in
                 return [
                     "frequency": "\(rule.frequency)",
                     "interval": rule.interval,
-                    "dateEnd": rule.recurrenceEnd?.endDate?.localDate() ?? "",
+                    "dateEnd": rule.recurrenceEnd?.endDate ?? "",
                     "daysOfTheWeek": rule.daysOfTheWeek != nil ? rule.daysOfTheWeek!.compactMap({ dayOfWeek in
                         return [
                             "dayOfTheWeek": "\(dayOfWeek.dayOfTheWeek)",

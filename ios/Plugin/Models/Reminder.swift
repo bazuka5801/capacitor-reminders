@@ -18,6 +18,7 @@ struct Reminder: Equatable, Identifiable {
     var completionDate: Date?
     var recurrenceRules: [EKRecurrenceRule]?
     var hasRecurrenceRules: Bool = false
+    var lastModifiedDate: Date?
 }
 
 extension Array where Element == Reminder {

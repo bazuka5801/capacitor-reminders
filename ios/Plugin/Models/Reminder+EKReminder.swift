@@ -19,5 +19,6 @@ extension Reminder {
         isComplete = ekReminder.isCompleted
         completionDate = ekReminder.completionDate
         hasRecurrenceRules = ekReminder.hasRecurrenceRules
+        lastModifiedDate = ekReminder.lastModifiedDate
     }
 }

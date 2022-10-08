@@ -29,7 +29,8 @@ export interface CapacitorReminder {
   isComplete: boolean
   completionDate?: string
   hasRecurrenceRules: boolean
-  recurrenceRules: RecurrenceRule[]
+  recurrenceRules: RecurrenceRule[],
+  lastModifiedDate: string
 }
 
 export interface RemindersPlugin {

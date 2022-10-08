@@ -104,6 +104,7 @@ delete({ id }: { id: string; }) => Promise<void>
 | **`completionDate`**     | <code>string</code>           |
 | **`hasRecurrenceRules`** | <code>boolean</code>          |
 | **`recurrenceRules`**    | <code>RecurrenceRule[]</code> |
+| **`lastModifiedDate`**   | <code>string</code>           |
 
 
 #### RecurrenceRule
